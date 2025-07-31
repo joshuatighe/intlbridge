@@ -22,14 +22,17 @@ const App: React.FC = () => {
             <SmallBubble
               Icon={() => <LibraryBig width={16} height={16} />}
               text="centralized info"
+              devStatus="done"
             />
             <SmallBubble
               Icon={() => <ListCollapse width={16} height={16} />}
               text="college recommendations"
+              devStatus="dev"
             />
             <SmallBubble
               Icon={() => <FileUser width={16} height={16} />}
               text="application tracker"
+              devStatus="none"
             />
           </div>
           <button className="mt-10 p-3 rounded-xl font-bold bg-gradient-to-br from-red-600 to-blue-600 shadow-[6px_6px_6px_0px_rgba(0,_0,_0,_0.1)] ring-1">
