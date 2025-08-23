@@ -27,7 +27,7 @@ const ApplicationsPage = () => {
       <div>
         <h2 className="text-3xl font-bold tracking-tight">Applications Page</h2>
         <p className="text-sm text-slate-500">
-          All your applications in one place
+          All your college applications in one place
         </p>
       </div>
 

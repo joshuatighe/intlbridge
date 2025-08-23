@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { LucideGlobe } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { applicationsPath, homePath } from "@/paths";
@@ -39,15 +40,23 @@ export default function RootLayout({
             w-full flex py-2.5 px-5 justify-between
           "
         >
-          <Link
-            href={homePath()}
-            className={buttonVariants({ variant: "outline" })}
-          >
-            Home
-          </Link>
-          <Link href={applicationsPath()} className={buttonVariants()}>
-            Applications
-          </Link>
+          <div>
+            <Link
+              href={homePath()}
+              className={buttonVariants({ variant: "ghost" })}
+            >
+              <LucideGlobe />
+              <h1 className="text-lg font-semibold">intlbridge</h1>
+            </Link>
+          </div>
+          <div>
+            <Link
+              href={applicationsPath()}
+              className={buttonVariants({ variant: "default" })}
+            >
+              Applications
+            </Link>
+          </div>
         </nav>
         <main
           className="
