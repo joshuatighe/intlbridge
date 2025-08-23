@@ -1,10 +1,12 @@
-import { ListChecks, PencilLine, SquareX } from "lucide-react";
+import {
+  LucideListChecks,
+  LucidePencilLine,
+  LucideSquareX,
+} from "lucide-react";
 import Link from "next/link";
 import {
   Card,
-  CardAction,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -14,9 +16,9 @@ import { initialApplications } from "@/data";
 import { applicationPath } from "@/paths";
 
 const APPLICATION_ICONS = {
-  APPLIED: <ListChecks />,
-  IN_PROGRESS: <PencilLine />,
-  NOT_BEGUN: <SquareX />,
+  APPLIED: <LucideListChecks />,
+  IN_PROGRESS: <LucidePencilLine />,
+  NOT_BEGUN: <LucideSquareX />,
 };
 
 const ApplicationsPage = () => {
