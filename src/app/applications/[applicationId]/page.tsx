@@ -16,7 +16,7 @@ const ApplicationsPage = async ({ params }: ApplicationPageProps) => {
     (application) => application.id === applicationId,
   );
 
-  if (!application)
+  if (!application) {
     return (
       <Placeholder
         label="Application not found"
@@ -27,6 +27,7 @@ const ApplicationsPage = async ({ params }: ApplicationPageProps) => {
         }
       />
     );
+  }
 
   return (
     <div>
