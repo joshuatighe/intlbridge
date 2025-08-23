@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { ListChecks, PencilLine, SquareX } from "lucide-react";
 import Link from "next/link";
 import {
@@ -10,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { initialApplications } from "@/data";
 import { applicationPath } from "@/paths";
 
@@ -24,10 +24,12 @@ const ApplicationsPage = () => {
     <div className="flex-1 flex flex-col gap-y-8">
       <div>
         <h2 className="text-3xl font-bold tracking-tight">Applications Page</h2>
-        <p className="text-sm text-white/80">
+        <p className="text-sm text-slate-500">
           All your applications in one place
         </p>
       </div>
+
+      <Separator />
 
       <div className="flex-1 flex flex-col items-center gap-y-4 animate-fade-from-top">
         {initialApplications.map((application) => (
