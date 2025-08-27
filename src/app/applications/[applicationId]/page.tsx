@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Placeholder } from "@/components/placeholder";
 import { Button } from "@/components/ui/button";
 import { initialApplications } from "@/data";
+import { ApplicationItem } from "@/features/application/components/application-item";
 import { applicationsPath } from "@/paths";
 
 type ApplicationPageProps = {
@@ -30,9 +31,8 @@ const ApplicationsPage = async ({ params }: ApplicationPageProps) => {
   }
 
   return (
-    <div>
-      <h2 className="text-lg">{application?.title}</h2>
-      <p className="text-sm">{application?.content}</p>
+    <div className="flex justify-center animate-fade-from-top">
+      <ApplicationItem application={application} isDetail />
     </div>
   );
 };

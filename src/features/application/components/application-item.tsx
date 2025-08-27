@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { LucideExternalLink } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -8,9 +9,10 @@ import type { Application } from "../types";
 
 type ApplicationItemProps = {
   application: Application;
+  isDetail?: boolean;
 };
 
-const ApplicationItem = ({ application }: ApplicationItemProps) => {
+const ApplicationItem = ({ application, isDetail }: ApplicationItemProps) => {
   const detailButton = (
     <Button variant="outline" size="icon" asChild className="flex-1">
       <Link href={applicationPath(application.id)}>
@@ -20,7 +22,12 @@ const ApplicationItem = ({ application }: ApplicationItemProps) => {
   );
 
   return (
-    <div className="w-full max-w-[420px] flex gap-x-1">
+    <div
+      className={clsx("w-full flex gap-x-1", {
+        "max-w-[580px]": isDetail,
+        "max-w-[420px]": !isDetail,
+      })}
+    >
       <Card key={application.id} className="w-full">
         <CardHeader>
           <CardTitle className="flex gap-x-2 items-center">
@@ -29,10 +36,18 @@ const ApplicationItem = ({ application }: ApplicationItemProps) => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <span className="line-clamp-3">{application.content}</span>
+          <span
+            className={clsx("whitespace-break-spaces", {
+              "line-clamp-3": !isDetail,
+            })}
+          >
+            {application.content}
+          </span>
         </CardContent>
       </Card>
-      <div className="flex flex-col gap-y-1">{detailButton}</div>
+      {isDetail ? null : (
+        <div className="flex flex-col gap-y-1">{detailButton}</div>
+      )}
     </div>
   );
 };
