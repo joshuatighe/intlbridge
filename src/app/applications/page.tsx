@@ -1,10 +1,9 @@
+import { Suspense } from "react";
 import { Heading } from "@/components/heading";
-import { ApplicationItem } from "@/features/application/components/application-item";
-import { getApplications } from "@/features/queries/get-applications";
+import { Loader } from "@/components/loader";
+import { ApplicationList } from "@/features/application/components/application-list";
 
-const ApplicationsPage = async () => {
-  const applications = await getApplications();
-
+const ApplicationsPage = () => {
   return (
     <div className="flex-1 flex flex-col gap-y-8">
       <Heading
@@ -12,11 +11,9 @@ const ApplicationsPage = async () => {
         description="All your college applications in one place"
       />
 
-      <div className="flex-1 flex flex-col items-center gap-y-4 animate-fade-from-top">
-        {applications.map((application) => (
-          <ApplicationItem key={application.id} application={application} />
-        ))}
-      </div>
+      <Suspense fallback={<Loader label="Loading applications" />}>
+        <ApplicationList />
+      </Suspense>
     </div>
   );
 };
