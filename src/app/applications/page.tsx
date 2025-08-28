@@ -1,23 +1,9 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import { Heading } from "@/components/heading";
 import { ApplicationItem } from "@/features/application/components/application-item";
-import type { Application } from "@/features/application/types";
 import { getApplications } from "@/features/queries/get-applications";
 
-const ApplicationsPage = () => {
-  const [applications, setApplications] = useState<Application[]>([]);
-
-  useEffect(() => {
-    const fetchApplications = async () => {
-      const res = await getApplications();
-
-      setApplications(res);
-    };
-
-    fetchApplications();
-  });
+const ApplicationsPage = async () => {
+  const applications = await getApplications();
 
   return (
     <div className="flex-1 flex flex-col gap-y-8">

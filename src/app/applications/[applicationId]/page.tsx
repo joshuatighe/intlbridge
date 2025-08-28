@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { Placeholder } from "@/components/placeholder";
 import { Button } from "@/components/ui/button";
-import { initialApplications } from "@/data";
 import { ApplicationItem } from "@/features/application/components/application-item";
+import { getApplication } from "@/features/queries/get-application";
 import { applicationsPath } from "@/paths";
 
 type ApplicationPageProps = {
@@ -12,10 +12,7 @@ type ApplicationPageProps = {
 };
 
 const ApplicationsPage = async ({ params }: ApplicationPageProps) => {
-  const { applicationId } = await params;
-  const application = initialApplications.find(
-    (application) => application.id === applicationId,
-  );
+  const application = await getApplication((await params).applicationId);
 
   if (!application) {
     return (
