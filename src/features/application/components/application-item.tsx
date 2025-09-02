@@ -3,9 +3,9 @@ import { LucideExternalLink } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import type { Application } from "@/generated/prisma/client";
 import { applicationPath } from "@/paths";
 import { APPLICATION_ICONS } from "../constants";
-import type { Application } from "../types";
 
 type ApplicationItemProps = {
   application: Application;
