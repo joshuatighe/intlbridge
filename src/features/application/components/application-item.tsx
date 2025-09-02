@@ -1,10 +1,13 @@
+"use client";
+
 import clsx from "clsx";
-import { LucideExternalLink } from "lucide-react";
+import { LucideExternalLink, LucideX } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { Application } from "@/generated/prisma/client";
 import { applicationPath } from "@/paths";
+import { deleteApplication } from "../actions/deleteApplication";
 import { APPLICATION_ICONS } from "../constants";
 
 type ApplicationItemProps = {
@@ -14,10 +17,20 @@ type ApplicationItemProps = {
 
 const ApplicationItem = ({ application, isDetail }: ApplicationItemProps) => {
   const detailButton = (
-    <Button variant="outline" size="icon" asChild className="flex-1">
+    <Button variant="outline" size="icon" asChild>
       <Link href={applicationPath(application.id)}>
-        <LucideExternalLink />
+        <LucideExternalLink className="h-4 w-4" />
       </Link>
+    </Button>
+  );
+
+  const handleDeleteApplication = async () => {
+    await deleteApplication(application.id);
+  };
+
+  const deleteButton = (
+    <Button variant="outline" size="icon" onClick={handleDeleteApplication}>
+      <LucideX className="h-4 w-4" />
     </Button>
   );
 
@@ -45,9 +58,9 @@ const ApplicationItem = ({ application, isDetail }: ApplicationItemProps) => {
           </span>
         </CardContent>
       </Card>
-      {isDetail ? null : (
-        <div className="flex flex-col gap-y-1">{detailButton}</div>
-      )}
+      <div className="flex flex-col gap-y-1">
+        {isDetail ? deleteButton : detailButton}
+      </div>
     </div>
   );
 };
