@@ -1,17 +1,10 @@
-import { initialApplications } from "@/data";
-import type { Application } from "../application/types";
+import { prisma } from "@/lib/prisma";
 
-const getApplication = async (
-  applicationId: string,
-): Promise<Application | null> => {
-  await new Promise((res) => setTimeout(res, 2000));
-
-  const application = initialApplications.find(
-    (application) => application.id === applicationId,
-  );
-
-  return new Promise((res) => {
-    res(application || null);
+const getApplication = async (id: string) => {
+  return await prisma.application.findUnique({
+    where: {
+      id,
+    },
   });
 };
 

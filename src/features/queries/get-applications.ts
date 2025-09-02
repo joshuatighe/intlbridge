@@ -1,10 +1,9 @@
-import { initialApplications } from "@/data";
-import type { Application } from "../application/types";
+import { prisma } from "@/lib/prisma";
 
-export const getApplications = async (): Promise<Application[]> => {
-  await new Promise((res) => setTimeout(res, 2000));
-
-  return new Promise((res) => {
-    res(initialApplications);
+export const getApplications = async () => {
+  return await prisma.application.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 };

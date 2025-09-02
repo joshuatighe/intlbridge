@@ -32,7 +32,7 @@ const ApplicationItem = ({ application, isDetail }: ApplicationItemProps) => {
         <CardHeader>
           <CardTitle className="flex gap-x-2 items-center">
             <span>{APPLICATION_ICONS[application.status]}</span>
-            <span className="truncate">{application.title}</span>
+            <span className="truncate">{application.uni}</span>
           </CardTitle>
         </CardHeader>
         <CardContent>
