@@ -1,5 +1,3 @@
-"use client";
-
 import clsx from "clsx";
 import { LucideExternalLink, LucideX } from "lucide-react";
 import Link from "next/link";
@@ -24,14 +22,12 @@ const ApplicationItem = ({ application, isDetail }: ApplicationItemProps) => {
     </Button>
   );
 
-  const handleDeleteApplication = async () => {
-    await deleteApplication(application.id);
-  };
-
   const deleteButton = (
-    <Button variant="outline" size="icon" onClick={handleDeleteApplication}>
-      <LucideX className="h-4 w-4" />
-    </Button>
+    <form action={deleteApplication.bind(null, application.id)}>
+      <Button variant="outline" size="icon">
+        <LucideX className="h-4 w-4" />
+      </Button>
+    </form>
   );
 
   return (
