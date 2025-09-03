@@ -16,7 +16,7 @@ type ApplicationItemProps = {
 const ApplicationItem = ({ application, isDetail }: ApplicationItemProps) => {
   const detailButton = (
     <Button variant="outline" size="icon" asChild>
-      <Link href={applicationPath(application.id)}>
+      <Link prefetch href={applicationPath(application.id)}>
         <LucideExternalLink className="h-4 w-4" />
       </Link>
     </Button>
