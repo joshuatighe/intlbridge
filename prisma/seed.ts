@@ -2,18 +2,18 @@ import { prisma } from "@/lib/prisma";
 
 const applications = [
   {
-    uni: "University of Notre Dame",
-    content: "This is the first application from the database",
+    college: "University of Notre Dame",
+    notes: "This is the first application from the database",
     status: "APPLIED" as const,
   },
   {
-    uni: "Boston College",
-    content: "This is the second application from the database",
+    college: "Boston College",
+    notes: "This is the second application from the database",
     status: "IN_PROGRESS" as const,
   },
   {
-    uni: "Virginia Tech",
-    content: "This is the third application from the database",
+    college: "Virginia Tech",
+    notes: "This is the third application from the database",
     status: "NOT_BEGUN" as const,
   },
 ];

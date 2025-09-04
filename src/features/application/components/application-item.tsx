@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { Application } from "@/generated/prisma/client";
 import { applicationPath } from "@/paths";
-import { deleteApplication } from "../actions/deleteApplication";
+import { deleteApplication } from "../actions/delete-application";
 import { APPLICATION_ICONS } from "../constants";
 
 type ApplicationItemProps = {
@@ -41,7 +41,7 @@ const ApplicationItem = ({ application, isDetail }: ApplicationItemProps) => {
         <CardHeader>
           <CardTitle className="flex gap-x-2 items-center">
             <span>{APPLICATION_ICONS[application.status]}</span>
-            <span className="truncate">{application.uni}</span>
+            <span>{application.college}</span>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -50,7 +50,7 @@ const ApplicationItem = ({ application, isDetail }: ApplicationItemProps) => {
               "line-clamp-3": !isDetail,
             })}
           >
-            {application.content}
+            {application.notes}
           </span>
         </CardContent>
       </Card>

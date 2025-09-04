@@ -19,8 +19,8 @@ model Application {
   id        String            @id @default(cuid())
   createdAt DateTime          @default(now())
   updatedAt DateTime          @updatedAt
-  uni       String
-  content   String            @db.VarChar(1024)
+  college   String
+  notes     String            @db.VarChar(1024)
   status    ApplicationStatus @default(IN_PROGRESS)
 }
 
