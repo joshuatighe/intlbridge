@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -8,15 +9,23 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { createApplication } from "../actions/create-application";
+import type { Application } from "@/generated/prisma";
+import { updateApplication } from "../actions/update-application";
 
-const ApplicationCreateForm = () => {
+type ApplicationUpdateFormProps = {
+  application: Application;
+};
+
+const ApplicationUpdateForm = ({ application }: ApplicationUpdateFormProps) => {
   return (
-    <form action={createApplication} className="flex flex-col gap-y-3">
+    <form
+      action={updateApplication.bind(null, application.id)}
+      className="flex flex-col gap-y-3"
+    >
       <Label htmlFor="college">College</Label>
-      <Select name="college">
+      <Select name="college" defaultValue={application.college}>
         <SelectTrigger className="w-full">
-          <SelectValue placeholder="Select a college" />
+          <SelectValue />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="Stanford">Stanford</SelectItem>
@@ -30,11 +39,11 @@ const ApplicationCreateForm = () => {
       </Select>
 
       <Label htmlFor="notes">Notes</Label>
-      <Textarea id="notes" name="notes" />
+      <Textarea id="notes" name="notes" defaultValue={application.notes} />
 
-      <Button type="submit">Create</Button>
+      <Button type="submit">Update</Button>
     </form>
   );
 };
 
-export { ApplicationCreateForm };
+export { ApplicationUpdateForm };

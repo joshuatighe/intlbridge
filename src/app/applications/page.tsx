@@ -1,13 +1,7 @@
 import { Suspense } from "react";
+import { CardCompact } from "@/components/card-compact";
 import { Heading } from "@/components/heading";
 import { Loader } from "@/components/loader";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { ApplicationCreateForm } from "@/features/application/components/application-create-form";
 import { ApplicationList } from "@/features/application/components/application-list";
 
@@ -19,17 +13,12 @@ const ApplicationsPage = () => {
         description="Keep track of all your college applications in one place"
       />
 
-      <Card className="w-full max-w-[420px] self-center">
-        <CardHeader>
-          <CardTitle>Create Application</CardTitle>
-          <CardDescription>
-            Create a new college application to keep track of
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ApplicationCreateForm />
-        </CardContent>
-      </Card>
+      <CardCompact
+        title="Create Application"
+        description="Create a new college application to keep track of"
+        content={<ApplicationCreateForm />}
+        className="w-full max-w-[420px] self-center"
+      />
 
       <Suspense fallback={<Loader label="Loading applications" />}>
         <ApplicationList />
