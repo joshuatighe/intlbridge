@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { CardCompact } from "@/components/card-compact";
-import { ApplicationUpdateForm } from "@/features/application/components/application-update-form";
+import { ApplicationUpsertForm } from "@/features/application/components/application-upsert-form";
 import { getApplication } from "@/features/queries/get-application";
 
 type ApplicationEditPageProps = {
@@ -23,7 +23,7 @@ const ApplicationEditPage = async ({ params }: ApplicationEditPageProps) => {
         title="Edit Application"
         description="Edit an existing application"
         className="w-full max-w-[420px] animate-fade-from-top"
-        content={<ApplicationUpdateForm application={application} />}
+        content={<ApplicationUpsertForm application={application} />}
       />
     </div>
   );

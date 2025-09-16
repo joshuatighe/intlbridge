@@ -9,20 +9,20 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import type { Application } from "@/generated/prisma";
-import { updateApplication } from "../actions/update-application";
+import { upsertApplication } from "../actions/upsert-application";
 
-type ApplicationUpdateFormProps = {
-  application: Application;
+type ApplicationUpsertFormProps = {
+  application?: Application;
 };
 
-const ApplicationUpdateForm = ({ application }: ApplicationUpdateFormProps) => {
+const ApplicationUpsertForm = ({ application }: ApplicationUpsertFormProps) => {
   return (
     <form
-      action={updateApplication.bind(null, application.id)}
+      action={upsertApplication.bind(null, application?.id)}
       className="flex flex-col gap-y-3"
     >
       <Label htmlFor="college">College</Label>
-      <Select name="college" defaultValue={application.college}>
+      <Select name="college" defaultValue={application?.college}>
         <SelectTrigger className="w-full">
           <SelectValue />
         </SelectTrigger>
@@ -38,11 +38,11 @@ const ApplicationUpdateForm = ({ application }: ApplicationUpdateFormProps) => {
       </Select>
 
       <Label htmlFor="notes">Notes</Label>
-      <Textarea id="notes" name="notes" defaultValue={application.notes} />
+      <Textarea id="notes" name="notes" defaultValue={application?.notes} />
 
-      <Button type="submit">Update</Button>
+      <Button type="submit">{application ? "Edit" : "Create"}</Button>
     </form>
   );
 };
 
-export { ApplicationUpdateForm };
+export { ApplicationUpsertForm };
