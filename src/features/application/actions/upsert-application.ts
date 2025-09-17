@@ -5,8 +5,9 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { applicationPath, applicationsPath } from "@/paths";
 
-const upsertApplication = async (
+export const upsertApplication = async (
   id: string | undefined,
+  _actionState: { message: string },
   formData: FormData,
 ) => {
   const data = {
@@ -27,6 +28,6 @@ const upsertApplication = async (
   if (id) {
     redirect(applicationPath(id));
   }
-};
 
-export { upsertApplication };
+  return { message: "Application created" };
+};

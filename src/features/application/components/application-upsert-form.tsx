@@ -1,8 +1,7 @@
 "use client";
 
-import { LucideLoaderCircle } from "lucide-react";
-import { useTransition } from "react";
-import { Button } from "@/components/ui/button";
+import { useActionState } from "react";
+import { SubmitButton } from "@/components/form/submit-button";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -20,16 +19,15 @@ type ApplicationUpsertFormProps = {
 };
 
 const ApplicationUpsertForm = ({ application }: ApplicationUpsertFormProps) => {
-  const [isPending, startTransition] = useTransition();
-
-  const upsertApplicationAction = (formData: FormData) => {
-    startTransition(async () => {
-      await upsertApplication.bind(null, application?.id)(formData);
-    });
-  };
+  const [actionState, action] = useActionState(
+    upsertApplication.bind(null, application?.id),
+    {
+      message: "",
+    },
+  );
 
   return (
-    <form action={upsertApplicationAction} className="flex flex-col gap-y-3">
+    <form action={action} className="flex flex-col gap-y-3">
       <Label htmlFor="college">College</Label>
       <Select name="college" defaultValue={application?.college}>
         <SelectTrigger className="w-full">
@@ -49,10 +47,9 @@ const ApplicationUpsertForm = ({ application }: ApplicationUpsertFormProps) => {
       <Label htmlFor="notes">Notes</Label>
       <Textarea id="notes" name="notes" defaultValue={application?.notes} />
 
-      <Button disabled={isPending} type="submit">
-        {isPending && <LucideLoaderCircle className="h-4 w-4 animate-spin" />}
-        {application ? "Edit" : "Create"}
-      </Button>
+      <SubmitButton label={application ? "Edit" : "Create"} />
+
+      {actionState.message}
     </form>
   );
 };
