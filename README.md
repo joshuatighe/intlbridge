@@ -12,9 +12,14 @@ upon dev completion, students will be able to:
 - [next.js](https://nextjs.org/)
 - [tailwind](https://tailwindcss.com/)
 - [typescript](https://www.typescriptlang.org/)
-- [lucide](https://lucide.dev/) icons
+- [prisma](https://www.prisma.io/)
+- [supabase](https://supabase.com/)
+- [zod](https://zod.dev/)
+- [lucide](https://lucide.dev/)
 - [shadcn ui](https://ui.shadcn.com/)
 
-and deployed with [vercel](https://vercel.com/home)
+deployed with [vercel](https://vercel.com/home)
+
+learning through robin wieruch's [road to next](https://www.road-to-next.com/) course
 
 ☘️ developed with care by joshua tighe
