@@ -7,13 +7,13 @@ import { prisma } from "@/lib/prisma";
 import { applicationPath, applicationsPath } from "@/paths";
 
 const upsertApplicationSchema = z.object({
-  college: z.string(),
+  college: z.string().min(1),
   notes: z.string().min(1).max(1024),
 });
 
 export const upsertApplication = async (
   id: string | undefined,
-  _actionState: { message: string },
+  _actionState: { message: string; payload?: FormData },
   formData: FormData,
 ) => {
   try {
@@ -30,7 +30,10 @@ export const upsertApplication = async (
       create: data,
     });
   } catch (_error) {
-    return { message: "Something went wrong" };
+    return {
+      message: "Something went wrong",
+      payload: formData,
+    };
   }
 
   revalidatePath(applicationsPath());

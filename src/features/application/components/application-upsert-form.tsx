@@ -29,7 +29,13 @@ const ApplicationUpsertForm = ({ application }: ApplicationUpsertFormProps) => {
   return (
     <form action={action} className="flex flex-col gap-y-3">
       <Label htmlFor="college">College</Label>
-      <Select name="college" defaultValue={application?.college}>
+      <Select
+        name="college"
+        defaultValue={
+          (actionState.payload?.get("college") as string) ??
+          application?.college
+        }
+      >
         <SelectTrigger className="w-full">
           <SelectValue />
         </SelectTrigger>
@@ -45,7 +51,13 @@ const ApplicationUpsertForm = ({ application }: ApplicationUpsertFormProps) => {
       </Select>
 
       <Label htmlFor="notes">Notes</Label>
-      <Textarea id="notes" name="notes" defaultValue={application?.notes} />
+      <Textarea
+        id="notes"
+        name="notes"
+        defaultValue={
+          (actionState.payload?.get("notes") as string) ?? application?.notes
+        }
+      />
 
       <SubmitButton label={application ? "Edit" : "Create"} />
 
