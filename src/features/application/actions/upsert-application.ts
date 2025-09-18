@@ -3,6 +3,10 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import {
+  type ActionState,
+  fromErrorToActionState,
+} from "@/components/form/utils/to-action-state";
 import { prisma } from "@/lib/prisma";
 import { applicationPath, applicationsPath } from "@/paths";
 
@@ -13,7 +17,7 @@ const upsertApplicationSchema = z.object({
 
 export const upsertApplication = async (
   id: string | undefined,
-  _actionState: { message: string; payload?: FormData },
+  _actionState: ActionState,
   formData: FormData,
 ) => {
   try {
@@ -29,11 +33,8 @@ export const upsertApplication = async (
       update: data,
       create: data,
     });
-  } catch (_error) {
-    return {
-      message: "Something went wrong",
-      payload: formData,
-    };
+  } catch (error) {
+    return fromErrorToActionState(error, formData);
   }
 
   revalidatePath(applicationsPath());
