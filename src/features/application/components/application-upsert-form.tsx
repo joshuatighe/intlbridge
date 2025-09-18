@@ -1,7 +1,9 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
+import { FieldError } from "@/components/form/field-error";
 import { SubmitButton } from "@/components/form/submit-button";
+import { EMPTY_ACTION_STATE } from "@/components/form/utils/to-action-state";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -13,6 +15,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import type { Application } from "@/generated/prisma";
 import { upsertApplication } from "../actions/upsert-application";
+import { COLLEGES } from "../constants";
 
 type ApplicationUpsertFormProps = {
   application?: Application;
@@ -21,10 +24,12 @@ type ApplicationUpsertFormProps = {
 const ApplicationUpsertForm = ({ application }: ApplicationUpsertFormProps) => {
   const [actionState, action] = useActionState(
     upsertApplication.bind(null, application?.id),
-    {
-      message: "",
-    },
+    EMPTY_ACTION_STATE,
   );
+
+  const useEffect(() => {
+
+  })
 
   return (
     <form action={action} className="flex flex-col gap-y-3">
@@ -40,15 +45,14 @@ const ApplicationUpsertForm = ({ application }: ApplicationUpsertFormProps) => {
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="Stanford">Stanford</SelectItem>
-          <SelectItem value="Massachusetts Institute of Technology">
-            Massachusetts Institute of Technology
-          </SelectItem>
-          <SelectItem value="University of Notre Dame">
-            University of Notre Dame
-          </SelectItem>
+          {COLLEGES.map((college) => (
+            <SelectItem key={college} value={college}>
+              {college}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
+      <FieldError actionState={actionState} name="college" />
 
       <Label htmlFor="notes">Notes</Label>
       <Textarea
@@ -58,10 +62,9 @@ const ApplicationUpsertForm = ({ application }: ApplicationUpsertFormProps) => {
           (actionState.payload?.get("notes") as string) ?? application?.notes
         }
       />
+      <FieldError actionState={actionState} name="notes" />
 
       <SubmitButton label={application ? "Edit" : "Create"} />
-
-      {actionState.message}
     </form>
   );
 };

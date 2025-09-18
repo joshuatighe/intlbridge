@@ -6,13 +6,14 @@ import { z } from "zod";
 import {
   type ActionState,
   fromErrorToActionState,
+  toActionState,
 } from "@/components/form/utils/to-action-state";
 import { prisma } from "@/lib/prisma";
 import { applicationPath, applicationsPath } from "@/paths";
 
 const upsertApplicationSchema = z.object({
-  college: z.string().min(1),
-  notes: z.string().min(1).max(1024),
+  college: z.string().min(1, "College field is required"),
+  notes: z.string().min(1, "Please enter some notes").max(1024),
 });
 
 export const upsertApplication = async (
@@ -43,5 +44,5 @@ export const upsertApplication = async (
     redirect(applicationPath(id));
   }
 
-  return { message: "Application created" };
+  return toActionState("SUCCESS", "Ticket created");
 };
