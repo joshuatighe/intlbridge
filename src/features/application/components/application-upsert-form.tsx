@@ -27,10 +27,6 @@ const ApplicationUpsertForm = ({ application }: ApplicationUpsertFormProps) => {
     EMPTY_ACTION_STATE,
   );
 
-  const useEffect(() => {
-
-  })
-
   return (
     <form action={action} className="flex flex-col gap-y-3">
       <Label htmlFor="college">College</Label>
