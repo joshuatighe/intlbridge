@@ -1,7 +1,9 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import { useActionState } from "react";
+import { toast } from "sonner";
 import { FieldError } from "@/components/form/field-error";
+import { useActionFeedback } from "@/components/form/hooks/use-action-feedback";
 import { SubmitButton } from "@/components/form/submit-button";
 import { EMPTY_ACTION_STATE } from "@/components/form/utils/to-action-state";
 import { Label } from "@/components/ui/label";
@@ -26,6 +28,19 @@ const ApplicationUpsertForm = ({ application }: ApplicationUpsertFormProps) => {
     upsertApplication.bind(null, application?.id),
     EMPTY_ACTION_STATE,
   );
+
+  useActionFeedback(actionState, {
+    onSuccess: ({ actionState }) => {
+      if (actionState.message) {
+        toast.success(actionState.message);
+      }
+    },
+    onError: ({ actionState }) => {
+      if (actionState.message) {
+        toast.error(actionState.message);
+      }
+    },
+  });
 
   return (
     <form action={action} className="flex flex-col gap-y-3">
