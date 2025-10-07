@@ -21,6 +21,13 @@ export const upsertApplication = async (
   _actionState: ActionState,
   formData: FormData,
 ) => {
+  if (process.env.FORM_SUBMISSIONS_ENABLED === "FALSE") {
+    return toActionState(
+      "ERROR",
+      "Form actions are currently disabled. Please try again later.",
+    );
+  }
+
   try {
     const data = upsertApplicationSchema.parse({
       college: formData.get("college"),
