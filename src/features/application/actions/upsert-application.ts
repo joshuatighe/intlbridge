@@ -44,5 +44,5 @@ export const upsertApplication = async (
     redirect(applicationPath(id));
   }
 
-  return toActionState("SUCCESS", "Ticket created");
+  return toActionState("SUCCESS", "Application created");
 };
