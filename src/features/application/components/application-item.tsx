@@ -1,11 +1,11 @@
 import clsx from "clsx";
-import { LucideExternalLink, LucideX } from "lucide-react";
+import { LucideExternalLink, LucidePen, LucideX } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { Application } from "@/generated/prisma/client";
-import { applicationPath } from "@/paths";
-import { deleteApplication } from "../actions/deleteApplication";
+import { applicationEditPath, applicationPath } from "@/paths";
+import { deleteApplication } from "../actions/delete-application";
 import { APPLICATION_ICONS } from "../constants";
 
 type ApplicationItemProps = {
@@ -18,6 +18,14 @@ const ApplicationItem = ({ application, isDetail }: ApplicationItemProps) => {
     <Button variant="outline" size="icon" asChild>
       <Link prefetch href={applicationPath(application.id)}>
         <LucideExternalLink className="h-4 w-4" />
+      </Link>
+    </Button>
+  );
+
+  const editButton = (
+    <Button variant="outline" size="icon" asChild>
+      <Link prefetch href={applicationEditPath(application.id)}>
+        <LucidePen className="h-4 w-4" />
       </Link>
     </Button>
   );
@@ -41,7 +49,7 @@ const ApplicationItem = ({ application, isDetail }: ApplicationItemProps) => {
         <CardHeader>
           <CardTitle className="flex gap-x-2 items-center">
             <span>{APPLICATION_ICONS[application.status]}</span>
-            <span className="truncate">{application.uni}</span>
+            <span>{application.college}</span>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -50,12 +58,22 @@ const ApplicationItem = ({ application, isDetail }: ApplicationItemProps) => {
               "line-clamp-3": !isDetail,
             })}
           >
-            {application.content}
+            {application.notes}
           </span>
         </CardContent>
       </Card>
       <div className="flex flex-col gap-y-1">
-        {isDetail ? deleteButton : detailButton}
+        {isDetail ? (
+          <>
+            {editButton}
+            {deleteButton}
+          </>
+        ) : (
+          <>
+            {detailButton}
+            {editButton}
+          </>
+        )}
       </div>
     </div>
   );
