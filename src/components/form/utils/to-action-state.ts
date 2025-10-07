@@ -40,7 +40,7 @@ export const fromErrorToActionState = (
     // return generic error message for unknown error
     return {
       status: "ERROR",
-      message: "An unknown error occured",
+      message: "An unknown error occurred",
       fieldErrors: {},
       payload: formData,
       timestamp: Date.now(),
