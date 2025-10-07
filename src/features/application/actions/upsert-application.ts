@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { setCookieByKey } from "@/actions/cookies";
 import {
   type ActionState,
   fromErrorToActionState,
@@ -48,6 +49,7 @@ export const upsertApplication = async (
   revalidatePath(applicationsPath());
 
   if (id) {
+    await setCookieByKey("toast", "Application updated");
     redirect(applicationPath(id));
   }
 
