@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import { RedirectToast } from "@/components/redirect-toast";
 import { ApplicationItem } from "@/features/application/components/application-item";
 import { getApplication } from "@/features/queries/get-application";
 
@@ -17,12 +16,9 @@ const ApplicationsPage = async ({ params }: ApplicationPageProps) => {
   }
 
   return (
-    <>
-      <div className="flex justify-center animate-fade-from-top">
-        <ApplicationItem application={application} isDetail />
-      </div>
-      <RedirectToast />
-    </>
+    <div className="flex justify-center animate-fade-from-top">
+      <ApplicationItem application={application} isDetail />
+    </div>
   );
 };
 
