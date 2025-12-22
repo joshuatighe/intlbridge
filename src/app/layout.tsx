@@ -5,7 +5,6 @@ import { Analytics } from "@vercel/analytics/next";
 import { Header } from "@/components/header";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
-import { RedirectToast } from "@/components/redirect-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,7 +36,6 @@ export default function RootLayout({
             {children}
           </main>
           <Toaster expand />
-          <RedirectToast />
         </ThemeProvider>
         <Analytics />
       </body>
