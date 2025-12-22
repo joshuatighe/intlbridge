@@ -1,10 +1,14 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { toast } from "sonner";
 import { consumeCookiedByKey } from "@/actions/cookies";
 
 const RedirectToast = () => {
+  const pathname = usePathname();
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <used in a layout, must be re-rendered on path change>
   useEffect(() => {
     const showCookieToast = async () => {
       const message = await consumeCookiedByKey("toast");
@@ -15,7 +19,7 @@ const RedirectToast = () => {
     };
 
     showCookieToast();
-  }, []);
+  }, [pathname]);
 
   return null;
 };
